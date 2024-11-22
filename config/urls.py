@@ -19,10 +19,10 @@ from django.urls import path
 from django.http import JsonResponse
 
 def home(request):
-    resp = {'app': 'test-django', 'version': '0.1.0', 'message': 'Hello, world!'}
-    return JsonResponse('Hello, world!')
+    info = {'app': 'test-django', 'version': '0.1.0', 'message': 'Hello, world!'}
+    return JsonResponse(info)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),  # Use the view function here
+    path('', home),  
 ]
