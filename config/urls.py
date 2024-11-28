@@ -17,13 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 def home(request):
     info = {'app': 'test-django', 'version': '0.1.0', 'message': 'Hello, world!'}
-    return JsonResponse(info)
+    JsonResponse(info)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('', home),  
     path('users/', include('users.urls')),
 ]
